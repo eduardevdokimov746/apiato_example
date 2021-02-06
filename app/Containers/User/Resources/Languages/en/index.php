@@ -1,9 +1,8 @@
 <?php
 
 return [
-
     'table-list-users' => [
-        'first' => 'Login',
+        'first' => ':attr',
         'second' => 'Email'
     ]
 ];

@@ -1,56 +1,29 @@
 @extends('layouts.main')
 
 @section('content')
-{{--    <table class="table table-hover">--}}
-{{--        <thead>--}}
-{{--            <tr>--}}
-{{--                <th scope="col">#</th>--}}
-{{--                <th scope="col">{{ __('user::index.table-list-users.first') }}</th>--}}
-{{--                <th scope="col">{{ __('user::index.table-list-users.second') }}</th>--}}
-{{--            </tr>--}}
-{{--        </thead>--}}
-{{--        <tbody>--}}
+    <form action="{{ route('users') }}" method="post" @submit.prevent="actionSub">
+        <label for="login">
+            Введите Login:
+            <input type="text" id="login" v-model="login">
+        </label>
+        <label for="email">
+            Введите email:
+            <input type="email" id="email" v-model="email">
+        </label>
 
-{{--            @foreach($users as $user)--}}
-{{--                <tr>--}}
-{{--                    <th scope="row">{{ $loop->iteration }}</th>--}}
-{{--                    <td>{{ $user->login }}</td>--}}
-{{--                    <td>{{ $user->email }}</td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-{{--        </tbody>--}}
-{{--    </table>--}}
-{{--    {{ $users->links() }}--}}
-    <button id="bb">send</button>
-    <script src="{{ asset('js/autobahn.min.js') }}"></script>
-    <script>
+        <label for="checkbox_pwd_visible">
+            Видимость пароля
+            <input type="checkbox" id="checkbox_pwd_visible" @change="changeVisiblePwd">
+        </label>
+        <label>
+            Введите пароль:
+            <input type="@{{ pwd_input_type }}" id="password" v-model="password">
+        </label>
+        <label>
+            Введите пароль повторно:
+            <input type="@{{ pwd_input_type }}" id="password_confirmation" v-model="password_confirmation">
+        </label>
 
-        $('#bb').click(function(){
-            $.ajax({
-                url: 'http://custom/users/sad',
-                data: {'topic': 'test', 'msg': 'hello world'},
-                success: function(data){
-                    console.log(data);
-                },
-                error: function(data){
-                    console.log(data);
-                }
-            });
-        });
-
-
-        // var conn = new WebSocket('ws://127.0.0.1:5555');
-
-        window.conn.onopen = function(e) {
-            console.log("Connection established!");
-            var data = {'setTopic' : 'test'};
-            window.conn.send(JSON.stringify(data));
-        };
-
-        conn.onmessage = function(e) {
-            console.log(e.data);
-        };
-
-    </script>
-
+        <button type="submit">Зарегистрировать</button>
+    </form>
 @endsection

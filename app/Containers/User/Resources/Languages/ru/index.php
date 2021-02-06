@@ -2,7 +2,7 @@
 
 return [
     'table-list-users' => [
-        'first' => 'Логин',
+        'first' => ':attr',
         'second' => 'Эл. почта'
     ]
 ];

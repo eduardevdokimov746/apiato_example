@@ -3,6 +3,7 @@
 namespace App\Containers\User\UI\WEB\Requests;
 
 use App\Ship\Parents\Requests\Request;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Class StoreUserRequest.
@@ -33,7 +34,7 @@ class StoreUserRequest extends Request
      * @var  array
      */
     protected $decode = [
-        // 'id',
+        //'login',
     ];
 
     /**
@@ -43,7 +44,7 @@ class StoreUserRequest extends Request
      * @var  array
      */
     protected $urlParameters = [
-        // 'id',
+
     ];
 
     /**
@@ -52,8 +53,9 @@ class StoreUserRequest extends Request
     public function rules()
     {
         return [
-            // 'id' => 'required',
-            // '{user-input}' => 'required|max:255',
+            'login' => 'required|unique:users,login',
+            'email' => 'required|email',
+            'password' => 'min:3|confirmed'
         ];
     }
 
@@ -62,8 +64,6 @@ class StoreUserRequest extends Request
      */
     public function authorize()
     {
-        return $this->check([
-            'hasAccess',
-        ]);
+        return true;
     }
 }

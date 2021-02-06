@@ -3,6 +3,7 @@
 namespace App\Containers\User\UI\WEB\Controllers;
 
 use App\Containers\User\Jobs\TestJob;
+use App\Containers\User\Models\User;
 use App\Containers\User\UI\WEB\Requests\CreateUserRequest;
 use App\Containers\User\UI\WEB\Requests\DeleteUserRequest;
 use App\Containers\User\UI\WEB\Requests\GetAllUsersRequest;
@@ -30,6 +31,8 @@ class Controller extends WebController
     {
 //        Apiato::call('User@GetAllUsersAction');
 
+        //$users = User::get()->toJson();
+
         return view('user::index');
     }
 
@@ -53,9 +56,9 @@ class Controller extends WebController
      *
      * @param CreateUserRequest $request
      */
-    public function create(CreateUserRequest $request)
+    public function create()
     {
-        // ..
+        return view('user::create');
     }
 
     /**
@@ -65,9 +68,8 @@ class Controller extends WebController
      */
     public function store(StoreUserRequest $request)
     {
-        $user = Apiato::call('User@CreateUserAction', [$request]);
-
-        // ..
+       // return $this->validate(request(), ['login' => 'required'])->get('login');
+        return $request->validated();
     }
 
     /**
